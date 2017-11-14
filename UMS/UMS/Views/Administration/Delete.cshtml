@@ -1,0 +1,113 @@
+﻿@model UMS.Models.UserInfo
+
+@{
+    ViewBag.Title = "Remove";
+    Layout = null;
+}
+
+
+<h3 align="center">Are you sure you want to remove this User?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zipcode):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zipcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role.RoleName):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role.RoleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status.StatusName):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status.StatusName)
+        </dd>
+
+   
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions">
+            <input type="submit" value="Remove" class="btn btn-primary btn-lg" /> 
+           
+        </div>
+    }
+</div>

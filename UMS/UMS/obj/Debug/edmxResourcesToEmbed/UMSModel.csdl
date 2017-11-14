@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UMSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ProfilePicture">
+    <Key>
+      <PropertyRef Name="Picture_Id" />
+    </Key>
+    <Property Name="Picture_Id" Type="Int32" Nullable="false" />
+    <Property Name="User_Id" Type="Int32" />
+    <Property Name="Filename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Size" Type="Int32" />
+    <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserInfoes" Relationship="Self.FK_UserInfo_ProfilePicture" FromRole="ProfilePicture" ToRole="UserInfo" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Role_Id" />
+    </Key>
+    <Property Name="Role_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserInfoes" Relationship="Self.FK_UserInfo_Role" FromRole="Role" ToRole="UserInfo" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Status_Id" />
+    </Key>
+    <Property Name="Status_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserInfoes" Relationship="Self.FK_UserInfo_Status" FromRole="Status" ToRole="UserInfo" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UserCredential">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserInfo" Relationship="Self.FK_UserCredentials_UserInfo" FromRole="UserCredentials" ToRole="UserInfo" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Zipcode" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="Status_Id" Type="Int32" />
+    <Property Name="Role_Id" Type="Int32" />
+    <Property Name="Picture_Id" Type="Int32" />
+    <NavigationProperty Name="ProfilePicture" Relationship="Self.FK_UserInfo_ProfilePicture" FromRole="UserInfo" ToRole="ProfilePicture" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_UserInfo_Role" FromRole="UserInfo" ToRole="Role" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_UserInfo_Status" FromRole="UserInfo" ToRole="Status" />
+    <NavigationProperty Name="UserCredential" Relationship="Self.FK_UserCredentials_UserInfo" FromRole="UserInfo" ToRole="UserCredentials" />
+  </EntityType>
+  <Association Name="FK_UserInfo_ProfilePicture">
+    <End Role="ProfilePicture" Type="Self.ProfilePicture" Multiplicity="0..1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProfilePicture">
+        <PropertyRef Name="Picture_Id" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="Picture_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfo_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Role_Id" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="Role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfo_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Status_Id" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="Status_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserCredentials_UserInfo">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+    <End Role="UserCredentials" Type="Self.UserCredential" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="UserCredentials">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UMSDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ProfilePictures" EntityType="Self.ProfilePicture" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Status" EntityType="Self.Status" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="UserCredentials" EntityType="Self.UserCredential" />
+    <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
+    <AssociationSet Name="FK_UserInfo_ProfilePicture" Association="Self.FK_UserInfo_ProfilePicture">
+      <End Role="ProfilePicture" EntitySet="ProfilePictures" />
+      <End Role="UserInfo" EntitySet="UserInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfo_Role" Association="Self.FK_UserInfo_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="UserInfo" EntitySet="UserInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfo_Status" Association="Self.FK_UserInfo_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="UserInfo" EntitySet="UserInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserCredentials_UserInfo" Association="Self.FK_UserCredentials_UserInfo">
+      <End Role="UserInfo" EntitySet="UserInfoes" />
+      <End Role="UserCredentials" EntitySet="UserCredentials" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

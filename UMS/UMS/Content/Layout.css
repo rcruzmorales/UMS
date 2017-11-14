@@ -1,0 +1,235 @@
+﻿
+
+#logInForm {
+    margin-right: -15px;
+    margin-left: -16px;
+    margin-top: 100px;
+}
+
+#clientForm {
+    margin-right: -15px;
+    margin-left: -16px;
+    margin-top: 100px;
+}
+
+#adminForm {
+    margin-right: -15px;
+    margin-left: -16px;
+    margin-top: 100px;
+}
+
+#registerLink {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+navbar > navbar-right > #registerLink:focus, #registerLink:hover {
+    color: #fff;
+    text-decoration: underline;
+    background-color: #732BA1;
+    cursor: pointer;
+}
+
+#collapseMenu:focus, #collapseMenu:hover {
+    background-color: #732BA1;
+}
+
+h5 {
+    font-weight: bold;
+}
+
+
+#Title {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 24px;
+    line-height: 20px;
+    text-decoration: none;
+    background-color: #9b59b6;
+    cursor: default;
+}
+
+.modalTitle {
+    color: #fff;
+    font-size: 25px;
+    height: 15px;
+}
+
+.modalHeader {
+    background-color: #9b59b6;
+    border-top: 1px solid #9b59b6;
+    border-bottom: 2px solid #9b59b6;
+    border-radius: 2px;
+    border: 1px solid #999;
+    border: 1px solid rgba(0, 0, 0, .2);
+    padding-bottom: 2px;
+}
+
+
+
+#profileLayout {
+    border-left: 1px solid #333;
+    height: 100%;
+    width: 1px;
+}
+
+#pictureLayout {
+    margin-top: 50px;
+    margin-right: 50px;
+}
+
+
+#profileTitle {
+    margin-left: 50px;
+}
+
+#nonClick {
+    background-color: transparent;
+    color: #fff;
+    cursor: default;
+    text-decoration: none;
+}
+
+#xClose {
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 20px;
+    padding-bottom: 5px;
+    color: #fff;
+    text-shadow: 0 1px 0 #fff;
+}
+
+    #xClose:hover,
+    #xClose:focus {
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.val {
+    padding-bottom: 10px;
+}
+
+.lab {
+    padding-top: 5px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#alert {
+    margin-top: 200px;
+}
+
+#search {
+    margin-right: 2px;
+}
+
+.dataTableHeader {
+    background-color: #9b59b6;
+    color: #ffffff;
+    font-size: 15px;
+    
+    /*border-radius: 25px;
+    padding-right: -20px;*/
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #9b59b6;
+    border-color: #9b59b6;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+    color: #fff;
+    background-color: #732BA1;
+    border-color: #732BA1;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #732BA1;
+    border-color: #732BA1;
+}
+
+
+ 
+
+@media screen and (max-width: 989px) {
+   
+    .container-fluid { width: 100%; }
+
+    #right-panel { width: 70%; float: right; }
+    #usersTable_filter{ float: left;}
+    #left-panel{ margin-top: 50px; width: 30%; float: left; }  
+    
+
+}
+
+@media screen and (max-width: 767px) {
+
+    ul[class = "nav navbar-nav navbar-right"] {
+        text-align: center;
+    }
+
+    .container-fluid { width: 100%; }
+
+    #adminForm { width: 100%; }
+    #left-panel { width: 30%; margin-top: 50px; float: left; }
+    #right-panel { width: 70%; float: right; }
+
+}
+
+@media screen and (max-width: 640px) {
+
+    .container-fluid { width: 100%; }
+
+    #adminForm { width: 100%; }
+    #clientForm { width: 100%; }
+    #left-panel { width: 100%; margin-top: 50px; margin-left: 150px; }
+    #right-panel { width: 100%;  }
+
+
+
+}
+
+@media screen and (max-width: 480px) {
+
+    .container-fluid { width: 320px }
+
+    #adminForm { width: 100%; }
+    #clientForm { width: 320px; }
+    #left-panel { width: 320px; margin-top: 80px; margin-left: 20px; }
+    #right-panel { width: 320px; }
+    #collapseMenu { float: left;}
+
+}
+
+/*input[type="file"] {
+
+    display: block;
+    margin-right: 112px;
+
+}*/

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="UMSDBModelStoreContainer" CdmEntityContainer="UMSDBEntities">
+    <EntitySetMapping Name="ProfilePictures">
+      <EntityTypeMapping TypeName="UMSDBModel.ProfilePicture">
+        <MappingFragment StoreEntitySet="ProfilePicture">
+          <ScalarProperty Name="Picture_Id" ColumnName="Picture_Id" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="Filename" ColumnName="Filename" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="UMSDBModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="UMSDBModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="UMSDBModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserCredentials">
+      <EntityTypeMapping TypeName="UMSDBModel.UserCredential">
+        <MappingFragment StoreEntitySet="UserCredentials">
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfoes">
+      <EntityTypeMapping TypeName="UMSDBModel.UserInfo">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+          <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+          <ScalarProperty Name="Picture_Id" ColumnName="Picture_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css") 
+    
+    <link href="~/Content/Layout.css" rel="stylesheet" /> 
+
+    <title>@ViewBag.Title UMS</title>
+
+       
+    <script>     
+        function noBack() { window.history.forward() }
+        noBack();
+        window.onload = noBack;
+        window.onpageshow = function (evt) { if (evt.persisted) noBack() }
+        window.onunload = function () { void (0) }
+    </script>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" id="Title">User Management System</a>
+                <button type="button" id="collapseMenu" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+
+            </div>
+            <div class="container-fluid">
+                <div class="navbar-collapse collapse">
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+ 
+        </div>
+    </div>
+    <div class="body-content">
+        @RenderBody()
+       
+        <footer style="margin-top: 300px">
+            <p>&copy; @DateTime.Now.Year - UMS Demo</p>
+        </footer>
+    </div>
+
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jqueryval")
+@RenderSection("scripts", required: false)
+@RenderSection("Error", required: false)
+
+
+</body>
+
+</html>

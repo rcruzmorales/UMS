@@ -1,0 +1,30 @@
+﻿
+@if (Session["FirstName"] != null)
+{
+        using (Html.BeginForm("LogOff", "User", FormMethod.Post, new { @class = "navbar-right",id="logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <ul  class="nav navbar-nav navbar-right" >
+                <li>
+                    <a style ="margin-left:5px "id="nonClick" class ="navbar-brand">Welcome @Session["FirstName"] </a>
+                </li>
+                <li>       
+                    <a class="navbar-brand" id ="registerLink" style="color:#fff;" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                </li>
+            </ul>
+    }
+}
+
+else
+{
+    <div class="navbar-brand navbar-right">
+        <a data-target="#registerModal" data-toggle="modal" id="registerLink">Register</a>
+    </div>
+}
+
+
+
+
+
+

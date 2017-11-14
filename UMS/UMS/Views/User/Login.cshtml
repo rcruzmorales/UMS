@@ -1,0 +1,187 @@
+﻿@model UMS.Models.UserInfo
+
+@{
+    ViewBag.Title = "";
+
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-3">
+            <section>
+
+
+                @using (Html.BeginForm("Login", "User", null, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "logInForm" }))
+                {
+                    
+                    <h2 class="col-md-12 col-md-offset-3">Log In</h2>
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = " col-md-2 control-label" })
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <span style="color: red; font-size: 18px">*</span>
+                                </div>
+                                @Html.TextBoxFor(m => m.Email, new {@class = "form-control ", id = "email", @placeholder = "Enter Email"})        
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger col-md-12 col-md-offset-2", @maxlength = 50})
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserCredential.Password, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <span  style="color: red; font-size: 18px">*</span>
+                                </div>
+                                @Html.PasswordFor(m => m.UserCredential.Password, new {@class = "form-control", id = "password", @maxlength = 12, @placeholder = "Password"})
+                               </div>
+                            @Html.ValidationMessageFor(m => m.UserCredential.Password, "", new { @class = "text-danger col-md-6 col-md-offset-1 col-md-pull-1" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Log in" class="btn btn-primary btn-lg" />
+                            <p>
+                                @Html.ActionLink("Forgot your password?", "ForgotPassword", "User")
+                            </p>
+                        </div>
+                    </div>
+                }
+                
+            </section>
+        </div>
+    </div>
+</div>
+
+<div id="registerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="margin-top: 7%;">
+        <div class="modal-content">
+            <div class="modal-header modalHeader" >
+                <h2 class="modal-title modalTitle text-center">Register</h2>
+                <button  class="close" data-toggle="modal" data-dismiss="modal"  id="xClose">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div id="modal-content"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="registeredModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm style="margin-top: 7%;"">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class=" modal-title modalTitle h3">Registration Succesfull</div>
+                <div class="modal-body">
+                    @Html.Raw("You have been registered your password is " + ViewBag.Password)
+                </div>
+                <div class="modal-footer">
+                    <input type="button" value="OK" class="btn btn-primary btn-lg" id="OK"  data-dismiss="modal" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="inactiveModal" class="modal fade alert-danger" role="dialog">
+    <div class="modal-dialog" id="alert" style="margin-top: 7%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class=" modal-title modalTitle h3">Alert Message</div>
+                <div class="modal-body">
+                    @Html.Raw("Account is inactive, please contact admin at rcruzmorales@csc.com")
+                </div>
+                <div class="modal-footer">
+                    <input type="button" value="OK" class="btn btn-primary btn-lg" id="OK" data-dismiss="modal" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="duplicateEmailModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm" style="margin-top: 7%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class=" modal-title modalTitle h3">Alert Messgae</div>
+                <div class="modal-body">
+                    @Html.Raw("A user already has the same username or emails, please use another")
+                </div>
+                <div class="modal-footer">
+                    <input type="button" value="OK" class="btn btn-primary btn-lg" id="OK" data-dismiss="modal" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="errorModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm" style="margin-top: 7%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class=" modal-title modalTitle h3">Alert Messgae</div>
+                <div class="modal-body">
+                    @Html.Raw("MMhhmm something fishy happended here. Could it be a html or script tag?")
+                </div>
+                <div class="modal-footer">
+                    <input type="button" value="OK" class="btn btn-primary btn-lg" id="OK" data-dismiss="modal" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+
+        var stat = '@ViewBag.Status';
+        var pass = '@ViewBag.Password';
+        
+
+        if (stat == '2') {
+            $("#inactiveModal").modal("toggle");
+        }
+
+        else  {
+            $("#inactiveModal").modal("hide");
+        }
+
+
+        if (pass != '') {
+            $("#registeredModal").modal("toggle");
+        }
+
+        else {
+            $("#registeredModal").modal("hide");
+        }
+
+        $("#registerLink").click(function (event) {
+            $("#modal-content").load("/User/Create");
+
+        });
+
+        var verifyEmail = '@ViewBag.Duplicate';
+
+        if (verifyEmail == '0') {
+            $("#duplicateEmailModal").modal("hide");
+        }
+        else if (verifyEmail == '1') {
+            $("#duplicateEmailModal").modal("show");
+        }
+
+        
+    </script>
+
+}

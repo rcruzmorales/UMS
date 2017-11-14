@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UMSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ProfilePicture">
+    <Key>
+      <PropertyRef Name="Picture_Id" />
+    </Key>
+    <Property Name="Picture_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_Id" Type="int" />
+    <Property Name="Filename" Type="nvarchar" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Size" Type="int" />
+    <Property Name="Data" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Role_Id" />
+    </Key>
+    <Property Name="Role_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Status_Id" />
+    </Key>
+    <Property Name="Status_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StatusName" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="UserCredentials">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="12" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="20" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="20" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="80" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="Country" Type="nvarchar" MaxLength="50" />
+    <Property Name="Zipcode" Type="nvarchar" MaxLength="9" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="13" />
+    <Property Name="Status_Id" Type="int" />
+    <Property Name="Role_Id" Type="int" />
+    <Property Name="Picture_Id" Type="int" />
+  </EntityType>
+  <Association Name="FK_UserCredentials_UserInfo1">
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="1" />
+    <End Role="UserCredentials" Type="Self.UserCredentials" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="UserCredentials">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfo_ProfilePicture">
+    <End Role="ProfilePicture" Type="Self.ProfilePicture" Multiplicity="0..1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProfilePicture">
+        <PropertyRef Name="Picture_Id" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="Picture_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfo_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Role_Id" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="Role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfo_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Status_Id" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="Status_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="UMSDBModelStoreContainer">
+    <EntitySet Name="ProfilePicture" EntityType="Self.ProfilePicture" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserCredentials" EntityType="Self.UserCredentials" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_UserCredentials_UserInfo1" Association="Self.FK_UserCredentials_UserInfo1">
+      <End Role="UserInfo" EntitySet="UserInfo" />
+      <End Role="UserCredentials" EntitySet="UserCredentials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfo_ProfilePicture" Association="Self.FK_UserInfo_ProfilePicture">
+      <End Role="ProfilePicture" EntitySet="ProfilePicture" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfo_Role" Association="Self.FK_UserInfo_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfo_Status" Association="Self.FK_UserInfo_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
